@@ -1,0 +1,49 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap");
+
+@theme {
+  --color-primary-blue: #1a76ff;
+  --color-primary-red: #ee54a7;
+  --color-primary-green: #28cc57;
+  --color-primary-yellow: #ffa31a;
+  --color-primary-purple: #9d62ff;
+  --color-primary-white: #ffffff;
+  --color-primary-black: #000000;
+  --color-primary-dark-gray: #5a5a5a;
+
+  --color-secondary-blue: #dae3fe;
+  --color-secondary-red: #eebfd8;
+  --color-secondary-green: #9fe8b3;
+  --color-secondary-yellow: #ffdeae;
+  --color-secondary-purple: #d4b8ff;
+  --color-secondary-grey: #eeeeee;
+
+  --font-family-geist: "Geist", sans-serif;
+
+  --font-size-h1: 96px;
+  --font-size-h2: 64px;
+  --font-size-h3: 32px;
+  --font-size-body: 22px;
+  --font-size-body2: 20px;
+
+  --border-radius-cta: 200px;
+  --box-shadow-cta: 0 0 6px #eeeeee;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Geist", Arial, Helvetica, sans-serif;
+}
