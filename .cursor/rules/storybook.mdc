@@ -1,0 +1,12 @@
+---
+alwaysApply: true
+---
+
+# Storybook Usage
+
+- Global CSS is imported in [.storybook/preview.ts](mdc:.storybook/preview.ts)
+- Write stories under `src/stories/**.stories.tsx`
+- Prefer token utilities from the design system; avoid raw hex and pixel values
+- Use `parameters.layout = 'centered' | 'padded'` appropriately
+- Controls: expose `variant` and `size` for components like CTA buttons
+- Accessibility: keep `@storybook/addon-a11y` enabled and address violations in stories

@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap");
+@import "tailwindcss";
 
 @theme {
   --color-primary-blue: #1a76ff;
@@ -18,16 +18,32 @@
   --color-secondary-purple: #d4b8ff;
   --color-secondary-grey: #eeeeee;
 
-  --font-family-geist: "Geist", sans-serif;
+  /* accent palette */
+  --color-accent-cyan: #00ffff;
+  --color-accent-fuchsia: #ff00f5;
+  --color-accent-pink: #ff50d4;
+  --color-accent-amber: #ffb000;
+  --color-accent-teal: #00ed97;
+  --color-accent-red: #ff0024;
 
-  --font-size-h1: 96px;
-  --font-size-h2: 64px;
-  --font-size-h3: 32px;
-  --font-size-body: 22px;
-  --font-size-body2: 20px;
+  /* neutrals for interactive states */
+  --color-neutral-30: #fafafa;
+  --color-neutral-50: #f6f6f6;
 
-  --border-radius-cta: 200px;
-  --box-shadow-cta: 0 0 6px #eeeeee;
+  /* borders */
+  --color-border-muted: #d9d9d9;
+
+  /* renamed to Tailwind token namespaces */
+  --font-geist: "Geist", sans-serif;
+
+  --text-h1: 96px;
+  --text-h2: 64px;
+  --text-h3: 32px;
+  --text-body: 22px;
+  --text-body2: 20px;
+
+  --radius-cta: 200px;
+  --shadow-cta: 0 0 6px #eeeeee;
 }
 
 :root {
@@ -39,6 +55,142 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+  }
+}
+
+/* Animated background helpers */
+@keyframes pan {
+  0% {
+    background-position:
+      0% 50%,
+      100% 50%,
+      50% 100%;
+  }
+  50% {
+    background-position:
+      100% 50%,
+      0% 50%,
+      50% 0%;
+  }
+  100% {
+    background-position:
+      0% 50%,
+      100% 50%,
+      50% 100%;
+  }
+}
+
+@keyframes grain {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  10% {
+    transform: translate3d(-1%, 1%, 0);
+  }
+  20% {
+    transform: translate3d(1%, -1%, 0);
+  }
+  30% {
+    transform: translate3d(1%, 1%, 0);
+  }
+  40% {
+    transform: translate3d(-1%, -1%, 0);
+  }
+  50% {
+    transform: translate3d(0.5%, 0.5%, 0);
+  }
+  60% {
+    transform: translate3d(-0.5%, 0.5%, 0);
+  }
+  70% {
+    transform: translate3d(0.5%, -0.5%, 0);
+  }
+  80% {
+    transform: translate3d(-0.5%, -0.5%, 0);
+  }
+  90% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Base blob drift */
+@keyframes blob {
+  0% {
+    transform: translate(0, 0) scale(1);
+    filter: brightness(1);
+  }
+  25% {
+    transform: translate(8%, -6%) scale(1.06);
+    filter: brightness(1.08);
+  }
+  50% {
+    transform: translate(-6%, 6%) scale(0.96);
+    filter: brightness(1);
+  }
+  75% {
+    transform: translate(6%, 4%) scale(1.04);
+    filter: brightness(1.06);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    filter: brightness(1);
+  }
+}
+
+/* New: subtle orbit with slight rotation */
+@keyframes blob2 {
+  0% {
+    transform: translate(-4%, -2%) rotate(-2deg) scale(1.02);
+  }
+  20% {
+    transform: translate(6%, -4%) rotate(2deg) scale(1.06);
+  }
+  40% {
+    transform: translate(10%, 4%) rotate(0deg) scale(0.98);
+  }
+  60% {
+    transform: translate(-2%, 8%) rotate(3deg) scale(1.04);
+  }
+  80% {
+    transform: translate(-8%, 0%) rotate(-1deg) scale(1);
+  }
+  100% {
+    transform: translate(-4%, -2%) rotate(-2deg) scale(1.02);
+  }
+}
+
+/* New: vertical float with breathing scale */
+@keyframes blob3 {
+  0% {
+    transform: translateY(-4%) scale(0.98);
+    filter: brightness(1);
+  }
+  25% {
+    transform: translateY(2%) scale(1.06);
+    filter: brightness(1.05);
+  }
+  50% {
+    transform: translateY(6%) scale(1);
+    filter: brightness(1);
+  }
+  75% {
+    transform: translateY(-2%) scale(1.04);
+    filter: brightness(1.05);
+  }
+  100% {
+    transform: translateY(-4%) scale(0.98);
+    filter: brightness(1);
+  }
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
   }
 }
 

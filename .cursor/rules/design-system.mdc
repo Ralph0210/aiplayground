@@ -1,0 +1,28 @@
+---
+alwaysApply: true
+---
+
+# Tailwind v4 Design System Tokens
+
+Use Tailwind v4 `@theme` tokens defined in [src/app/globals.css](mdc:src/app/globals.css). Prefer semantic utilities over arbitrary values.
+
+## Typography
+
+- Fonts: `font-geist`
+- Sizes: `text-h1`, `text-h2`, `text-h3`, `text-body`, `text-body2`
+- Leading: prefer `leading-none` per Figma
+
+## Colors
+
+- Primary: `bg-primary-{blue|red|green|yellow|purple|white|black|dark-gray}`
+- Secondary (panels): `bg-secondary-{blue|red|green|yellow|purple|grey}`
+- Text examples: `text-primary-black`, `text-primary-dark-gray`
+
+## Components
+
+- CTA button: `rounded-cta shadow-cta bg-primary-white text-primary-black`
+
+## Principles
+
+- Do NOT use hex values in classes when a token exists
+- New tokens should be added to [globals.css](mdc:src/app/globals.css) under `@theme` with Tailwind namespaces: `--color-*`, `--text-*`, `--font-*`, `--radius-*`, `--shadow-*`

@@ -6,6 +6,14 @@ interface CTAButtonProps {
   variant?: "primary" | "secondary"
   size?: "sm" | "md" | "lg"
   className?: string
+  /** Optional custom colors using tokens/hex. */
+  colors?: {
+    base: string
+    hover: string
+    active: string
+    border?: string
+    text?: string
+  }
 }
 
 export const CTAButton: React.FC<CTAButtonProps> = ({
@@ -14,32 +22,75 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
   variant = "primary",
   size = "md",
   className = "",
+  colors,
 }) => {
   const baseClasses =
-    "relative rounded-[200px] font-[Geist] font-medium text-center whitespace-nowrap transition-all duration-200 hover:scale-105 active:scale-95"
+    "group relative rounded-cta font-geist font-medium text-center whitespace-nowrap transition-transform duration-150 active:translate-y-[3px]"
 
-  const variantClasses = {
-    primary: "bg-[#ffffff] text-[#000000] shadow-[0_0_6px_#eeeeee]",
-    secondary: "bg-[#eeeeee] text-[#000000]",
-  }
+  const useCustom = Boolean(colors)
+
+  const hoverBg = useCustom
+    ? "hover:bg-[var(--btn-bg-hover)]"
+    : "hover:bg-neutral-50"
+
+  const activeBg = useCustom
+    ? "active:bg-[var(--btn-bg-active)]"
+    : "active:bg-neutral-50"
+
+  const textColor = useCustom
+    ? "text-[color:var(--btn-text)]"
+    : "text-primary-black"
+
+  const variantClasses = useCustom
+    ? `bg-[var(--btn-bg)] ${hoverBg} ${activeBg} ${textColor}`
+    : {
+        primary:
+          "bg-primary-white text-primary-black hover:bg-neutral-50 active:bg-neutral-50 shadow-cta",
+        secondary:
+          "bg-secondary-grey text-primary-black hover:bg-neutral-50 active:bg-neutral-50",
+      }[variant]
 
   const sizeClasses = {
-    sm: "px-6 py-3 text-[20px]",
-    md: "px-20 py-5 text-[22px]",
-    lg: "px-24 py-6 text-[32px]",
+    sm: "px-6 py-3 text-body2",
+    md: "px-20 py-5 text-body",
+    lg: "px-24 py-6 text-h3",
   }
 
-  const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`
+  const classes = `${baseClasses} ${variantClasses} ${sizeClasses[size]} ${className}`
+
+  const defaultBorder = "border-[0px_0px_6px] bottom-[-6px]"
+  const pressedBorder =
+    "group-active:border-[0px_0px_3px] group-active:bottom-[-3px]"
+
+  const styleVars: React.CSSProperties | undefined = useCustom
+    ? ({
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore CSS variable names
+        "--btn-bg": colors?.base,
+        // @ts-ignore
+        "--btn-bg-hover": colors?.hover,
+        // @ts-ignore
+        "--btn-bg-active": colors?.active,
+        // @ts-ignore
+        "--btn-border": colors?.border ?? "var(--color-secondary-grey)",
+        // @ts-ignore
+        "--btn-text": colors?.text ?? "var(--color-primary-black)",
+      } as React.CSSProperties)
+    : undefined
 
   return (
-    <button className={classes} onClick={onClick} type="button">
+    <button
+      className={classes}
+      onClick={onClick}
+      type="button"
+      style={styleVars}
+    >
       <div className="flex items-center justify-center gap-2.5">{children}</div>
-      {variant === "primary" && (
-        <div
-          className="absolute border-[#eeeeee] border-[0px_0px_6px] border-solid bottom-[-6px] left-0 pointer-events-none right-0 rounded-cta top-0"
-          aria-hidden="true"
-        />
-      )}
+      {/* bottom highlight ring */}
+      <div
+        className={`absolute ${useCustom ? "border-[color:var(--btn-border)]" : "border-secondary-grey"} border-solid left-0 right-0 rounded-cta top-0 pointer-events-none ${defaultBorder} ${pressedBorder} transition-all duration-150 ease-out`}
+        aria-hidden="true"
+      />
     </button>
   )
 }

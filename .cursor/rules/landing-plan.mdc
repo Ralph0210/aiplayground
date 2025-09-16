@@ -1,0 +1,31 @@
+---
+description: Landing page implementation guide per Figma node 255:3177
+---
+
+# Landing Page Plan
+
+Sections (order): Navbar → Hero → Built-at logos → Learn → Solve → No code → Loved by → CTA band → Footer.
+
+Primitives:
+
+- `Section` (outer spacing)
+- `GradientPanel` (hero/pastel panel backgrounds)
+- `BrowserFrame` (screenshot frame)
+
+Components:
+
+- `Navbar`, `Hero`, `LogoStrip`, `LearnSection`, `SolveSection`, `NoCodeSection`, `TestimonialsSection`, `CtaBand`, `Footer`
+
+Styling:
+
+- Typography: `font-geist` + `text-h1|h2|h3|body|body2`, `leading-none`
+- Colors: text `text-primary-black|dark-gray`, panels `bg-secondary-*`, CTA `rounded-cta shadow-cta`
+
+Grids:
+
+- Features: `grid-cols-1 md:grid-cols-3`
+- Testimonials: two rows of `md:grid-cols-3`
+
+Data:
+
+- Centralize copy in `src/content/sections.ts` for features, testimonials, footer links
